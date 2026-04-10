@@ -6,7 +6,8 @@ Intentionally vulnerable NodeJS application with a collection of web vulnerabili
 
 | Vulnerability | Description | Blog Post |
 |---------------|-------------|-----------|
-| Command Injection | Network Diagnostic Tool vulnerable to command injection | https://redteamworld.com  |
+| Command Injection | A Ping Network Diagnostic Tool | https://redteamworld.com  |
+| Reflected XSS | A simple Greetings Page | https://redteamworld.com  |
 
 ## Run
 
