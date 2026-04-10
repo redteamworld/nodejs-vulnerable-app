@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Network Diagnostic Tool</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<style>
+
+pre {
+    background: #020617;
+    color: #22c55e;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 6px;
+    height: 200px;
+    overflow: auto;
+    font-family: monospace;
+    border: 1px solid #1f2937;
+}
+</style>
+
+
+<body>
+
+{{sidebar}}
+
+<div class="content">
+    <div class="container">
+        <h1>Network Diagnostic Tool</h1>
+        <hr class="separator">
+        <p><i>Check connectivity to a host.</i></p>
+        <form id="pingForm">
+            <label>Host or IP Address</label>
+            <br>
+            <input id="target" name="target" type="text" placeholder="example.com">
+            <br>
+            <button type="submit">Run Ping</button>
+
+        </form>
+        <h3>Results</h3>
+        <pre id="results">No results yet.</pre>
+        <script>
+
+            document.getElementById("pingForm").addEventListener("submit", async function(e){
+            
+                e.preventDefault();
+            
+                const target = document.getElementById("target").value;
+            
+                const resultsBox = document.getElementById("results");
+            
+                resultsBox.textContent = "Running command...";
+            
+                const response = await fetch(`${document.location.href}/ping`, {
+            
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+            
+                    body: JSON.stringify({ target })
+            
+                });
+            
+                const data = await response.json();
+            
+                resultsBox.textContent = data.output;
+            
+            });
+            
+            </script>
+
+    </div>
+</div>
+
+{{footer}}
+
+
+</body>
+</html>

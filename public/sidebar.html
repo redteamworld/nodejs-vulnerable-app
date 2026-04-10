@@ -1,0 +1,28 @@
+<div id="sidebar" class="sidebar collapsed">
+  <button id="toggleBtn" class="toggle-btn">☰</button>
+
+  <ul class="menu">
+    <li><a href="/">Home</a></li>
+    <li><a href="/xss">XSS</a></li>
+    <li><a href="/command-injection">Command Injection</a></li>
+  </ul>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const sidebar = document.getElementById("sidebar");
+  const toggleBtn = document.getElementById("toggleBtn");
+
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("collapsed");
+    sidebar.classList.toggle("expanded");
+  });
+});
+</script>
+<!--
+<div class="sidebar">
+    <h2>Vulnerabilities</h2>
+  
+    <a href="/xss">XSS</a>
+    <a href="/command-injection">Command Injection</a>
+  </div>
+  -->

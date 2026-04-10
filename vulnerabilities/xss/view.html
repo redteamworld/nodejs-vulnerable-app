@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XSS</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+{{sidebar}}
+
+<div class="content">
+  <h1>Greetings Page</h1>
+  <hr class="separator">
+  <form>
+    <input name="name" placeholder="Enter your name">
+    <br>
+    <button>Submit</button>
+  </form>
+
+  <p>Hello {{output}}</p>
+</div>
+
+{{footer}}
+
+</body>
+</html>
