@@ -4,9 +4,9 @@ A collection of intentionally vulnerable applications for learning web security.
 
 ## Labs Overview
 
-| Vulnerability | Language | Lab | Blog Post |
-|---------------|----------|-----|----------|
-| Command Injection | Node.js | link | link |
+| Vulnerability | Description | Blog Post |
+|---------------|-------------|-----------|
+| Command Injection | Network Diagnostic Tool vulnerable to command injection | https://redteamworld.com  |
 
 ## Run Labs
 
