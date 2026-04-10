@@ -1,6 +1,6 @@
-# Vulnerable Web Security Labs
+# NodeJS Vulnerable App
 
-A collection of intentionally vulnerable applications for learning web security.
+Intentionally vulnerable NodeJS application with a collection of web vulnerabilities where you can practice on.
 
 ## Labs Overview
 
@@ -8,37 +8,19 @@ A collection of intentionally vulnerable applications for learning web security.
 |---------------|-------------|-----------|
 | Command Injection | Network Diagnostic Tool vulnerable to command injection | https://redteamworld.com  |
 
-## Run Labs
+## Run
 
-Each lab can be easily setup with docker on a linux machine after downloading specific vulnerable web application files.
+In order to run the application you just require docker, and run the following commands.
 
 ### Docker compose 
 
 ```bash
-# Run from inside the lab folder
-cd /nodejs-ping-lab
+# Run from the repo folder
+git clone https://github.com/redteamworld/nodejs-vulnerable-app.git
+cd nodejs-vulnerable-app
 docker-compose up --build 
 ```
 
+The NodeJS application will run at http://127.0.0.1:3000
 
-### Manual build and run 
-
-```bash
-
-# Build image
-dokcer build -t <container_name> ./ 
-docker images
-
-# Run container in interactive mode
-docker run -it --name <container_name> -p 8000:8000
-
-# Run container in background
-docker run -d --name <container_name> -p 8000:8000
-
-# Attach to container to see output
-docker attach --name <container_name>
-
-# Run interactive shell on container
-docker exec -it --name <container_name> sh
-
-```
+![Sceenshot](image.png)
