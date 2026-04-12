@@ -47,13 +47,9 @@ pre {
                 e.preventDefault();
             
                 const target = document.getElementById("target").value;
-            
                 const resultsBox = document.getElementById("results");
-            
                 resultsBox.textContent = "Running command...";
-            
                 const response = await fetch(`${document.location.href}/ping`, {
-            
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -62,11 +58,8 @@ pre {
                     body: JSON.stringify({ target })
             
                 });
-            
                 const data = await response.json();
-            
-                resultsBox.textContent = data.output;
-            
+                 resultsBox.textContent = data.output;
             });
             
             </script>

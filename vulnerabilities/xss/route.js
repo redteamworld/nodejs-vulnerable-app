@@ -9,8 +9,6 @@ module.exports = (renderWithSidebarFooter) => {
     const name = req.query.name || "";
 
     let html = fs.readFileSync(path.join(__dirname, "view.html"), "utf8");
-
-    // vulnerable injection
     html = html.replace("{{output}}", name);
 
     // add sidebar footer

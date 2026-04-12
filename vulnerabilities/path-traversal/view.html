@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View File</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    {{sidebar}}
+
+    <div class="content">
+        <h1>File Viewer</h1>
+        <hr class="separator">
+        <form>
+            <input type="text" name="file" placeholder="Enter file name">
+            <button type="submit">View</button>
+        </form>
+        <h2>File: {{filename}}</h2>
+        <h3>Output:</h3>
+        <pre>{{output}}</pre>
+    </div>
+
+    {{footer}}
+
+</body>
+</html>
