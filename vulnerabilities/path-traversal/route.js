@@ -15,7 +15,9 @@ module.exports = (renderWithSidebarFooter) => {
     }
 
     router.get("/", (req, res) => {
-      const file = req.query.file || "view.html";
+      let file = req.query.file || "view.html";
+
+      file = file.replaceAll("../","");
   
       const filePath = path.join(__dirname, file);
       
