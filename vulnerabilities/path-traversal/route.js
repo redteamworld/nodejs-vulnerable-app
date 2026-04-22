@@ -16,7 +16,7 @@ module.exports = (renderWithSidebarFooter) => {
 
     router.get("/", (req, res) => {
       let file = req.query.file || "view.html";
-
+   
       file = file.replaceAll("../","");
   
       const filePath = path.join(__dirname, file);
@@ -24,7 +24,7 @@ module.exports = (renderWithSidebarFooter) => {
       fs.readFile(filePath, 'utf8', (err, fileData) => {
         if (err) {
             fileData = 'Error reading file';
-        }
+        }        
         
         // Load template
         let html = fs.readFileSync(path.join(__dirname, "view.html"), "utf8");

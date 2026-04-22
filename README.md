@@ -8,6 +8,7 @@ Intentionally vulnerable NodeJS application with a collection of web vulnerabili
 |---------------|-------------|-----------|
 | Command Injection | A Ping Network Diagnostic Tool | https://redteamworld.com  |
 | Reflected XSS | A simple Greetings Page | https://redteamworld.com  |
+| Path Traversal | File Showing Page | https://redteamworld.com  |
 
 ## Run
 
