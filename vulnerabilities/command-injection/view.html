@@ -30,26 +30,21 @@ pre {
         <h1>Network Diagnostic Tool</h1>
         <hr class="separator">
         <p><i>Check connectivity to a host.</i></p>
-        <form id="pingForm">
+        <div id="pingForm">
             <label>Host or IP Address</label>
             <br>
             <input id="target" name="target" type="text" placeholder="example.com">
             <br>
-            <button type="submit">Run Ping</button>
-
-        </form>
+            <button onclick="RunPing()">Run Ping</button>
+        </div>
         <h3>Results</h3>
         <pre id="results">No results yet.</pre>
         <script>
-
-            document.getElementById("pingForm").addEventListener("submit", async function(e){
-            
-                e.preventDefault();
-            
+            function RunPing() {
                 const target = document.getElementById("target").value;
                 const resultsBox = document.getElementById("results");
                 resultsBox.textContent = "Running command...";
-                const response = await fetch(`${document.location.href}/ping`, {
+                fetch(`${document.location.href}/ping`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -57,10 +52,12 @@ pre {
             
                     body: JSON.stringify({ target })
             
+                })
+                .then(response => response.json())
+                .then(data => {
+                    resultsBox.textContent = data.output;
                 });
-                const data = await response.json();
-                 resultsBox.textContent = data.output;
-            });
+            }
             
             </script>
 
