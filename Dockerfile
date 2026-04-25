@@ -10,6 +10,6 @@ COPY . .
 # install ping utility (command-injection)
 RUN apk add --no-cache iputils
 
-EXPOSE 3000
+EXPOSE 3000 9229
 
-CMD ["node", "app.js"]
+CMD ["node", "--inspect=0.0.0.0:9229", "app.js"]
