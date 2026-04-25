@@ -5,3 +5,30 @@ services:
       - "3000:3000"
       - "9229:9229"
     restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=vulnerable_password
+      - DB_NAME=vulnerable_app
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: vulnerable_password
+      MYSQL_DATABASE: vulnerable_app
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db_data:

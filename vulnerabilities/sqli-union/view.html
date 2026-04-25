@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SQL Injection - UNION Based</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+{{sidebar}}
+
+<div class="content">
+  <h1>SQL Injection - UNION Based</h1>
+  <hr class="separator">
+  
+  <form method="GET">
+    <label for="product_name">Search Products:</label>
+    <br>
+    <input style="width:100%" type="text" name="product_name" id="product_name" placeholder="laptop" value="{{product_name}}">
+    <br>
+    <button type="submit">Search</button>
+  </form>
+
+  {{result}}
+
+</div>
+
+{{footer}}
+
+</body>
+</html>
