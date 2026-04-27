@@ -15,7 +15,6 @@ module.exports = (renderWithSidebarFooter) => {
       waitForConnections: true,
       connectionLimit: 20,
       queueLimit: 50,
-      acquireTimeout: 10000, // 10 seconds
     });
   
     router.get("/", async (req, res) => {
