@@ -13,8 +13,9 @@ module.exports = (renderWithSidebarFooter) => {
       password: process.env.DB_PASSWORD || "vulnerable_password",
       database: process.env.DB_NAME || "vulnerable_app",
       waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
+      connectionLimit: 20,
+      queueLimit: 50,
+      acquireTimeout: 10000, // 10 seconds
     });
   
     router.get("/", async (req, res) => {
