@@ -8,10 +8,10 @@ module.exports = (renderWithSidebarFooter) => {
   
     // Database connection pool
     const pool = mysql.createPool({
-      host: process.env.DB_HOST || "db",
-      user: process.env.DB_USER || "root",
-      password: process.env.DB_PASSWORD || "vulnerable_password",
-      database: process.env.DB_NAME || "vulnerable_app",
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       waitForConnections: true,
       connectionLimit: 20,
       queueLimit: 50,
