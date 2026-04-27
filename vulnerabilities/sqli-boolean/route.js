@@ -25,15 +25,11 @@ module.exports = (renderWithSidebarFooter) => {
   
       if (productName) {
         let tableHtml = `
-        <h3>Search Results</h3>
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-          </tr>
-        `;
+            <table>
+              <tr>
+              <th>Search Results</th>
+              </tr>
+            `;
         try {
             const connection = await pool.getConnection();
 
@@ -41,24 +37,15 @@ module.exports = (renderWithSidebarFooter) => {
             const query = `SELECT id, name, description, price FROM products WHERE name LIKE '%${productName}%'`;
 
             console.log("Executing Query:", query);
-            
+          
+
             const [rows] = await connection.execute(query);
             connection.release();
 
             if (rows.length > 0) {
-
-
-              rows.forEach((row) => {
                 tableHtml += `
-                  <tr>
-                    <td>${escapeHtml(row.id)}</td>
-                    <td>${escapeHtml(row.name)}</td>
-                    <td>${escapeHtml(row.description)}</td>
-                    <td>${escapeHtml(row.price)}</td>
-                  </tr>
-                `;
-              });
-
+                  <tr><td>Successfully found ${rows.length} products matching: "${escapeHtml(productName)}"</td></tr>
+              `;
             } else {
               tableHtml += `<tr><td>No products found matching: "${escapeHtml(productName)}"</td></tr>`;
             }
