@@ -6,9 +6,11 @@ Intentionally vulnerable NodeJS application with a collection of web vulnerabili
 
 | Vulnerability | Description | Blog Post |
 |---------------|-------------|-----------|
-| Command Injection | A Ping Network Diagnostic Tool | https://redteamworld.com  |
+| Command Injection | A Ping Network Diagnostic Tool | https://redteamworld.com/web/command-injection-nodejs/ |
 | Reflected XSS | A simple Greetings Page | https://redteamworld.com  |
 | Path Traversal | File Showing Page | https://redteamworld.com  |
+| SQLi Union Based | Search Page with results | https://redteamworld.com  |
+| SQLi Boolean Based | Search Page displaying only number of results | https://redteamworld.com  |
 
 ## Run
 
