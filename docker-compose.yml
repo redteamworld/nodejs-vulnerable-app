@@ -16,6 +16,7 @@ services:
 
   db:
     image: mysql:8.0
+    command: --secure-file-priv="" --plugin-dir=/tmp
     environment:
       MYSQL_ROOT_PASSWORD: vulnerable_password
       MYSQL_DATABASE: vulnerable_app
