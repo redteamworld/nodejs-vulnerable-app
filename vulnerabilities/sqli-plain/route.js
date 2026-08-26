@@ -37,7 +37,6 @@ module.exports = (renderWithSidebarFooter) => {
         try {
             const connection = await pool.getConnection();
 
-            // VULNERABLE: Direct query execution - allows ANY SQL command
             // No validation, no parameterization - complete arbitrary SQL execution
             console.log("Executing Query:", query);
             
@@ -73,9 +72,9 @@ module.exports = (renderWithSidebarFooter) => {
             }
             
         } catch (error) {
-            resultHtml += `<div class="error-box">`;
-            resultHtml += `<strong>SQL Error:</strong> ${escapeHtml(error.message)}`;
-            resultHtml += `</div>`;
+            resultHtml += `<table class="error-table"><tr><th>SQL Error</th></tr>`;
+            resultHtml += `<tr><td>${escapeHtml(error.message)}</td></tr>`;
+            resultHtml += `</table>`;
             console.error("SQL Error:", error.message);
         }
         resultHtml += `</div>`;
