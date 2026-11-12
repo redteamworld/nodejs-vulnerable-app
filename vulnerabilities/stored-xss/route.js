@@ -3,6 +3,7 @@ module.exports = (renderWithSidebarFooter) => {
   const fs = require("fs");
   const path = require("path");
   const mysql = require("mysql2/promise");
+  const sanitizeHtml = require('sanitize-html');
 
   const router = express.Router();
   const pool = mysql.createPool({
@@ -48,10 +49,14 @@ module.exports = (renderWithSidebarFooter) => {
       return res.status(400).send("Comment content is required.");
     }
 
-    // Intentionally insufficient: other HTML and event handlers remain allowed.
-    const content = req.body.content
-      .replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, "")
-      .trim();
+    const content = sanitizeHtml(req.body.content, {
+      allowedTags: [
+      'p', 'br', 'strong', 'em', 'u', 's',
+      'h1', 'h2', 'h3', 'pre', 'code',
+      'ul', 'ol', 'li', 'a', 'img', 'span'
+    ],
+      allowedAttributes: {}
+    }).trim();
 
     if (!content) {
       return res.status(400).send("Comment content is required.");

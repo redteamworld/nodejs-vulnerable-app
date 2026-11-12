@@ -42,9 +42,14 @@
   const editor = new Quill("#editor", {
     theme: "snow",
     placeholder: "Write a comment...",
+    formats: [
+      "header", "bold", "italic", "underline", "strike","code-block", "list", "link", "align"
+    ],
     modules: {
       toolbar: [
-        ["bold", "italic", "underline"],
+        [{ header: [1, 2, 3, false] }],
+        ["bold", "italic", "underline", "strike"],
+        ["code-block"],
         [{ list: "ordered" }, { list: "bullet" }],
         [{ align: [] }],
         ["link"],
@@ -54,7 +59,12 @@
   });
 
   document.getElementById("comment-form").addEventListener("submit", (event) => {
-    if (!editor.getText().trim()) {
+    const hasText = editor.getText().trim().length > 0;
+    const hasImage = editor.getContents().ops.some(
+      (op) => op.insert && typeof op.insert === "object" && op.insert.image
+    );
+
+    if (!hasText && !hasImage) {
       event.preventDefault();
       editor.focus();
       return;
