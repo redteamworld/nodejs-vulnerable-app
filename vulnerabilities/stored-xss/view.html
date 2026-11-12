@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stored XSS - Comments</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/vendor/quill/quill.snow.css">
+  <style>
+    #editor {
+      min-height: 150px;
+      background: white;
+    }
+
+    .comment {
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+
+{{sidebar}}
+
+<div class="content">
+  <h1>Post a Comment</h1>
+
+  <form method="POST" action="/stored-xss" id="comment-form">
+    <div id="editor"></div>
+    <input type="hidden" name="content" id="content">
+    <button type="submit">Save comment</button>
+  </form>
+
+  <hr class="separator">
+  <h2>Comments</h2>
+  {{comments}}
+</div>
+
+{{footer}}
+
+<script src="/vendor/quill/quill.min.js"></script>
+<script>
+  const editor = new Quill("#editor", {
+    theme: "snow",
+    placeholder: "Write a comment...",
+    modules: {
+      toolbar: [
+        ["bold", "italic", "underline"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ align: [] }],
+        ["link"],
+        ["clean"]
+      ]
+    }
+  });
+
+  document.getElementById("comment-form").addEventListener("submit", (event) => {
+    if (!editor.getText().trim()) {
+      event.preventDefault();
+      editor.focus();
+      return;
+    }
+
+    document.getElementById("content").value = editor.root.innerHTML;
+  });
+</script>
+
+</body>
+</html>

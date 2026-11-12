@@ -17,6 +17,11 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(100)
 );
 
+CREATE TABLE IF NOT EXISTS comments (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  content TEXT NOT NULL
+);
+
 -- Insert sample products
 INSERT INTO products (name, description, price) VALUES
 ('Laptop', 'High performance laptop with 16GB RAM', 999.99),
