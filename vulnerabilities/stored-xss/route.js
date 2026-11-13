@@ -54,8 +54,7 @@ module.exports = (renderWithSidebarFooter) => {
       'p', 'br', 'strong', 'em', 'u', 's',
       'h1', 'h2', 'h3', 'pre', 'code',
       'ul', 'ol', 'li', 'a', 'img', 'span'
-    ],
-      allowedAttributes: {}
+    ]
     }).trim();
 
     if (!content) {
