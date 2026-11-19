@@ -10,16 +10,17 @@
     <li><a href="/sqli-boolean">SQLi Boolean Based</a></li>
     <li><a href="/sqli-plain">SQL Query Execution</a></li>
     <li><a href="/stored-xss">Stored XSS Comments</a></li>
+    <li><a href="/template">Template</a></li>
   </ul>
 </div>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.getElementById("toggleBtn");
+    const sidebar = document.getElementById("sidebar");
+    const toggleBtn = document.getElementById("toggleBtn");
 
-  toggleBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("collapsed");
-    sidebar.classList.toggle("expanded");
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+      sidebar.classList.toggle("expanded");
+    });
   });
-});
 </script>

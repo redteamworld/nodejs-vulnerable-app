@@ -2,15 +2,20 @@
 
 Intentionally vulnerable NodeJS application with a collection of web vulnerabilities where you can practice on.
 
+**Warning:** This application intentionally allows server-side code execution. Run it only in an isolated environment, never on a shared host or an exposed network.
+
+
+
 ## Labs Overview
 
 | Vulnerability | Description | Blog Post |
 |---------------|-------------|-----------|
 | Command Injection | A Ping Network Diagnostic Tool | https://redteamworld.com/web/command-injection-nodejs/ |
-| Reflected XSS | A simple Greetings Page | https://redteamworld.com  |
-| Path Traversal | File Showing Page | https://redteamworld.com  |
-| SQLi Union Based | Search Page with results | https://redteamworld.com  |
-| SQLi Boolean Based | Search Page displaying only number of results | https://redteamworld.com  |
+| Reflected XSS | A simple Greetings Page | https://redteamworld.com |
+| Path Traversal | File Showing Page | https://redteamworld.com |
+| SQLi Union Based | Search Page with results | https://redteamworld.com |
+| SQLi Boolean Based | Search Page displaying only number of results | https://redteamworld.com |
+| Template Injection | Editable mail templates rendered with EJS | |
 
 ## Run
 

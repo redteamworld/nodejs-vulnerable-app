@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mail Templates</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .template-card {
+      margin-bottom: 36px;
+    }
+
+    .template-card select,
+    .template-card textarea {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+    }
+
+    .template-card textarea {
+      min-height: 160px;
+      font-family: monospace;
+    }
+
+    .template-card iframe {
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 180px;
+      border: 1px solid #374151;
+      background: white;
+    }
+
+    .status {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+{{sidebar}}
+
+<div class="content">
+  <h1>Mail Templates</h1>
+  <hr class="separator">
+  <p>
+    Choose an engine, edit the welcome email, and preview its rendered HTML.
+    The recipient is available as <code>recipient</code>.
+  </p>
+
+  <section class="template-card">
+    <h2>Welcome email</h2>
+
+    <form id="template-form">
+      <label for="engine">Template engine</label>
+      <br>
+      <select id="engine" name="engine">
+        <option value="ejs">EJS</option>
+        <option value="pug">Pug</option>
+      </select>
+
+      <p><label for="recipient">Recipient</label></p>
+      <input id="recipient" name="recipient" value="Alex" required>
+
+      <p><label for="template">Template</label></p>
+      <textarea id="template" name="template" required></textarea>
+      <br>
+      <button type="submit">Preview</button>
+    </form>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <h3>Preview</h3>
+    <iframe id="preview" title="Welcome email preview" sandbox=""></iframe>
+  </section>
+</div>
+
+{{footer}}
+
+<script>
+  const form = document.getElementById("template-form");
+  const engine = document.getElementById("engine");
+  const template = document.getElementById("template");
+  const preview = document.getElementById("preview");
+  const status = document.getElementById("status");
+  const button = form.querySelector("button");
+
+  const drafts = {
+    ejs: "<h2>Welcome, <%= recipient %>!</h2>\n<p>Thanks for joining us.</p>",
+    pug: "h2 Welcome, #{recipient}!\np Thanks for joining us."
+  };
+
+  let currentEngine = engine.value;
+  template.value = drafts[currentEngine];
+
+  engine.addEventListener("change", () => {
+    drafts[currentEngine] = template.value;
+    currentEngine = engine.value;
+    template.value = drafts[currentEngine];
+    preview.removeAttribute("srcdoc");
+    status.textContent = "";
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    button.disabled = true;
+    engine.disabled = true;
+    status.textContent = "Rendering preview...";
+
+    try {
+      const response = await fetch("/template/preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          engine: formData.get("engine"),
+          recipient: formData.get("recipient"),
+          template: formData.get("template")
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Preview failed.");
+      }
+
+      preview.srcdoc = `
+        <style>
+          body { overflow-wrap: anywhere; }
+          pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+        </style>
+        ${result.html}
+      `;
+      status.textContent = "Preview updated.";
+    } catch (error) {
+      preview.removeAttribute("srcdoc");
+      status.textContent = "Preview failed. Review your template.";
+    } finally {
+      button.disabled = false;
+      engine.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
